@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
     [SerializeField] private SpawnPoint[] _spawnPoints;
+    [SerializeField] private float _spawnDelay = 2f;
 
     private ObjectPool<Enemy> _pool;
 
@@ -32,15 +33,12 @@ public class Spawner : MonoBehaviour
         SpawnPoint spawnPoint = _spawnPoints[randomSpawnPoint];
 
         enemy.gameObject.SetActive(true);
-        enemy.ResetVelocity();
-        enemy.SetPosition(spawnPoint.transform.position);
-        enemy.SetMaterial(spawnPoint.GetMaterial());
-        enemy.SetRotation(spawnPoint.GetRandomRotation());
+        enemy.Initialize(spawnPoint.transform.position, spawnPoint.GetMaterial(), spawnPoint.GetRandomRotation());
     }
 
     private IEnumerator TwoSecondTimer()
     {
-        WaitForSeconds waitForSeconds = new(2f);
+        WaitForSeconds waitForSeconds = new(_spawnDelay);
 
         while (true)
         {

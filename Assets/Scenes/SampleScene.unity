@@ -311,6 +311,7 @@ MonoBehaviour:
   - {fileID: 1007840119}
   - {fileID: 409397207}
   - {fileID: 522429693}
+  _spawnDelay: 2
 --- !u!1001 &609510092
 PrefabInstance:
   m_ObjectHideFlags: 0

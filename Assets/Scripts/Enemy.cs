@@ -14,33 +14,35 @@ public class Enemy : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
+    private void Start()
+    {
+        ResetVelocity();
+    }
+
     private void Update()
     {
         MoveStraight();
     }
 
-    public void ResetVelocity()
+    public void Initialize(Vector3 position, Material material, Quaternion rotation)
     {
-        if (_rigidbody.velocity != Vector3.zero)
-        {
-            _rigidbody.velocity = Vector3.zero;
-        }
+        SetPosition(position);
+        _renderer.material = material;
+        gameObject.transform.rotation = rotation;
     }
 
-    public void SetPosition(Vector3 position)
+    private void SetPosition(Vector3 position)
     {
         position.y += transform.localScale.y;
         transform.position = position;
     }
 
-    public void SetMaterial(Material material)
+    private void ResetVelocity()
     {
-        _renderer.material = material;
-    }
-
-    public void SetRotation(Quaternion rotation)
-    {
-        gameObject.transform.rotation = rotation;
+        if (_rigidbody.velocity != Vector3.zero)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     private void MoveStraight()
