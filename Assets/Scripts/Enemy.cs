@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private Renderer _renderer;
+    private Vector3 _direction;
 
     private void Awake()
     {
@@ -24,11 +25,11 @@ public class Enemy : MonoBehaviour
         MoveStraight();
     }
 
-    public void Initialize(Vector3 position, Material material, Quaternion rotation)
+    public void Init(Vector3 spawnPosition, Material material, Vector3 direction)
     {
-        SetPosition(position);
+        SetPosition(spawnPosition);
         _renderer.material = material;
-        gameObject.transform.rotation = rotation;
+        _direction = direction;
     }
 
     private void SetPosition(Vector3 position)
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour
 
     private void MoveStraight()
     {
-        transform.Translate(_speed * Time.deltaTime * Vector3.forward);
+        transform.position = Vector3.MoveTowards(transform.position, _direction, _speed * Time.deltaTime);
+        transform.LookAt(_direction);
     }
 }

@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(TwoSecondTimer());
+        StartCoroutine(SpawnWithDelay());
     }
 
     private void InitializeEnemy(Enemy enemy)
@@ -33,10 +33,10 @@ public class Spawner : MonoBehaviour
         SpawnPoint spawnPoint = _spawnPoints[randomSpawnPoint];
 
         enemy.gameObject.SetActive(true);
-        enemy.Initialize(spawnPoint.transform.position, spawnPoint.GetMaterial(), spawnPoint.GetRandomRotation());
+        enemy.Init(spawnPoint.transform.position, spawnPoint.GetMaterial(), spawnPoint.GetDirection());
     }
 
-    private IEnumerator TwoSecondTimer()
+    private IEnumerator SpawnWithDelay()
     {
         WaitForSeconds waitForSeconds = new(_spawnDelay);
 

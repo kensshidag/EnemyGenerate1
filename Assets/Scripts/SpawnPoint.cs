@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class SpawnPoint : MonoBehaviour
 {
+    [SerializeField] private Vector3 _direction;
+
     private Renderer _renderer;
 
     private void Awake()
@@ -10,16 +12,13 @@ public class SpawnPoint : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
+    public Vector3 GetDirection()
+    {
+        return _direction;
+    }
+
     public Material GetMaterial()
     {
         return _renderer.material;
-    }
-
-    public Quaternion GetRandomRotation()
-    {
-        float maxRotationDegree = 360f;
-        float randomRotation = Random.Range(0, maxRotationDegree);
-
-        return Quaternion.Euler(0, randomRotation, 0);
     }
 }
