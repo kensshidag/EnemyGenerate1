@@ -49,6 +49,6 @@ public class Enemy : MonoBehaviour
     private void MoveStraight()
     {
         transform.position = Vector3.MoveTowards(transform.position, _direction, _speed * Time.deltaTime);
-        transform.LookAt(_direction);
+        transform.LookAt(_direction, Vector3.up);
     }
 }
